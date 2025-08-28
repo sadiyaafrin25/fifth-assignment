@@ -36,4 +36,27 @@ const coinDisplay = document.getElementById("coinDisplay");
  function updateCoinDisplay() {
       coinDisplay.textContent = coins + " Coins";
     }
- 
+ document.querySelectorAll("callBtn").forEach(button => {
+    button.addEventListener("click", ()=>{
+        const card = button.parentElement;
+        const service = card.querySelector(".service").innerText;
+        const serviceNum = card.querySelector(".serviceNum").innerText;
+
+        if(coins<20){
+            alert("Not Enough Coins !");
+            return;
+        }
+        coins-=20;
+        updateCoinDisplay();
+        alert(`calling ${service} (${serviceNum})`);
+
+        const li = document.createElement("li");
+        li.textContent=`${service} - ${serviceNum}`;
+        callHistoryList.appendChild(li);
+    })
+ })
+
+ clearHistoryBtn.addEventListener("click",()=>{
+callHistoryList.innerHTML=" ";
+ })
+ updateCoinDisplay();
