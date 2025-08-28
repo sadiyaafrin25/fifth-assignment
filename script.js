@@ -19,10 +19,14 @@ copyButtons.forEach(btn =>{
     btn.addEventListener("click" , ()=>{
          copyCount ++;
         copyCountE.textContent = copyCount ;
-       
-    })
-    })
-    
+        });
+    }); 
+   
+    const hotline = btn.parentElement.querySelector(".hotline").textContent.trim();
+      navigator.clipboard.writeText(hotline).then(() => {
+        alert(`Copied: ${hotline}`);
+      });
+   
 
 
 
@@ -34,21 +38,24 @@ copyButtons.forEach(btn =>{
 let coins = 100; 
 const coinDisplay = document.getElementById("coinDisplay");
 const callHistoryList = document.getElementById("callHistory");
-const clearHistoryBtn = document.getElementById("clearhistory");
+const clearHistoryBtn = document.getElementById("clearHistory");
 
 
 function updateCoinDisplay() {
-  coinDisplay.textContent = coins + " Coins";
+  coinDisplay.textContent = coins;
 }
 
 
 document.querySelectorAll(".callBtn").forEach(button => {
   button.addEventListener("click", () => {
-    const card = button.parentNode; 
+    const card = button.parentNode.parentNode; 
 
-    
-    const serviceName = card.children[0].innerText;
-    const serviceNumber = card.children[1].innerText;
+    const serviceName = card.querySelector(".service").innerText;
+    const serviceNumber = card.querySelector(".serviceNum").innerText;
+
+    // const serviceName = card.children[0].innerText;
+    // const serviceNumber = card.children[1].innerText;
+
 
     if (coins < 20) {
       alert(" Not enough coins! You need at least 20 coins to make a call.");
@@ -57,7 +64,7 @@ document.querySelectorAll(".callBtn").forEach(button => {
     coins -= 20;
     updateCoinDisplay();
 
-    alert(` Calling ${serviceName} (${serviceNumber})`);
+    alert(` Calling ${serviceName} number (${serviceNumber})`);
 
     const li = document.createElement("li");
     li.textContent = `${serviceName} - ${serviceNumber}`;
