@@ -64,7 +64,7 @@ document.querySelectorAll(".callBtn").forEach(button => {
     coins -= 20;
     updateCoinDisplay();
 
-    alert(` Calling ${serviceName} number (${serviceNumber})`);
+    alert(` Calling ${serviceName}  (${serviceNumber})`);
 
     const li = document.createElement("li");
     li.textContent = `${serviceName} - ${serviceNumber}`;
