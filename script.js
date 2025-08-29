@@ -9,31 +9,25 @@ btn.addEventListener("click" , () =>{
     heartCountE.textContent = heartCount;
 })
 })
-
-// copy count and hotline copy//
-
-const copyCountE = document.getElementById("copyCount");
+// copy count
+const copyCountE=document.getElementById("copyCount");
 let copyCount=0;
-const copyButtons = document.querySelectorAll(".copyBtn");
-copyButtons.forEach(btn =>{
-    btn.addEventListener("click" , ()=>{
-         copyCount ++;
-        copyCountE.textContent = copyCount ;
-        });
-    }); 
-   
-    const hotline = btn.parentElement.querySelector(".hotline").textContent.trim();
-      navigator.clipboard.writeText(hotline).then(() => {
-        alert(`Copied: ${hotline}`);
-      });
-   
+const copyButtons=document.querySelectorAll(".copyBtn");
+copyButtons.forEach(btn => {
+btn.addEventListener("click" , () =>{
+   copyCount++ ;
+    copyCountE.textContent = copyCount;
 
+   const hotline = btn.parentNode.parentElement.querySelectorAll(".hotline").innerText;
+ navigator.clipboard.writeText(hotline).then(() => {
 
+   alert(`Copied: ${hotline}`);
+   });
 
-//  clearHistoryBtn.addEventListener("click",()=>{
-// callHistoryList.innerHTML=" ";
-//  })
-//  updateCoinDisplay();
+})
+})
+
+  //  call-coin-history
 
 let coins = 100; 
 const coinDisplay = document.getElementById("coinDisplay");
@@ -63,11 +57,14 @@ document.querySelectorAll(".callBtn").forEach(button => {
     }
     coins -= 20;
     updateCoinDisplay();
+    const now = new Date();
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
 
     alert(` Calling ${serviceName}  (${serviceNumber})`);
 
     const li = document.createElement("li");
-    li.textContent = `${serviceName} - ${serviceNumber}`;
+    li.textContent = `${serviceName} - ${serviceNumber} ${date} at ${time}`;
     callHistoryList.appendChild(li);
   });
 });
